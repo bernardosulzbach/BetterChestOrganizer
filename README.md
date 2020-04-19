@@ -1,14 +1,14 @@
 # Better Chest Organizer
 
-Better Chest Organizer is a mod for Stardew Valley that aims to provide a better "organize" functionality for in-game chests.
+Better Chest Organizer is a mod for Stardew Valley that aims to provide a better automatic chest organization functionality.
 
 <p align="center">
-  <img src="https://github.com/bernardosulzbach/BetterChestOrganizer/raw/master/images/example-mod.png"
+  <img src="https://github.com/bernardosulzbach/BetterChestOrganizer/raw/master/images/example-organize.png"
        alt="Artisan products after sorting by the in-game button">
 </p>
 
 <p align="center">
-  <img src="https://github.com/bernardosulzbach/BetterChestOrganizer/raw/master/images/example-organize.png"
+  <img src="https://github.com/bernardosulzbach/BetterChestOrganizer/raw/master/images/example-mod.png"
        alt="Artisan products after sorting by the mod">
 </p>
 
