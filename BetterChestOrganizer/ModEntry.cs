@@ -11,12 +11,14 @@ namespace BetterChestOrganizer
 {
     public class ModEntry : Mod
     {
+        private const bool Debugging = false;
+
         public override void Entry(IModHelper helper)
         {
             helper.Events.World.ChestInventoryChanged += this.OnChestInventoryChange;
         }
 
-        private void PrintChestContents(StardewValley.Objects.Chest chest)
+        private void LogChestContents(StardewValley.Objects.Chest chest)
         {
             foreach (var item in chest.items)
             {
@@ -28,18 +30,28 @@ namespace BetterChestOrganizer
         {
             if (Context.IsMultiplayer)
             {
-                this.Monitor.Log($"Disabled because the current context is multiplayer. The mod has not been tested in MP yet.", LogLevel.Warn);
+                this.Monitor.Log(
+                    $"Disabled because the current context is multiplayer. The mod has not been tested in MP yet.",
+                    LogLevel.Warn);
                 return;
             }
+
             var chest = eventArgs.Chest;
-            this.Monitor.Log($"After inventory change, the chest has", LogLevel.Debug);
-            PrintChestContents(chest);
+            if (Debugging)
+            {
+                this.Monitor.Log($"After inventory change, the chest has", LogLevel.Debug);
+                LogChestContents(chest);
+            }
+
             var copiedList = chest.items.ToList();
             copiedList.Sort(ItemComparator.CompareItems);
             chest.items.Clear();
             chest.items.AddRange(copiedList);
-            this.Monitor.Log($"After ordering, the chest has", LogLevel.Debug);
-            PrintChestContents(chest);
+            if (Debugging)
+            {
+                this.Monitor.Log($"After ordering, the chest has", LogLevel.Debug);
+                LogChestContents(chest);
+            }
         }
     }
 }
