@@ -1,0 +1,10 @@
+{
+  "Name": "Better Chest Organizer",
+  "Author": "Bernardo Sulzbach",
+  "Version": "0.1.0",
+  "Description": "A better organize function for chests.",
+  "UniqueID": "BernardoSulzbach.BetterChestOrganizer",
+  "EntryDll": "BetterChestOrganizer.dll",
+  "MinimumApiVersion": "2.10.0",
+  "UpdateKeys": []
+}
