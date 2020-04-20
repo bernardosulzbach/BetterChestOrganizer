@@ -75,7 +75,14 @@ namespace BetterChestOrganizer
             }
 
             compare = CompareItemNames(a.Name, b.Name);
-            return compare != 0 ? compare : a.salePrice().CompareTo(b.salePrice());
+            if (compare != 0)
+            {
+                return compare;
+            }
+
+            compare = a.salePrice().CompareTo(b.salePrice());
+            // Largest stack first, intentionally.
+            return compare != 0 ? compare : b.Stack.CompareTo(a.Stack);
         }
     }
 }
