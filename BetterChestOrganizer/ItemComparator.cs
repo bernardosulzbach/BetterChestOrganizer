@@ -79,13 +79,13 @@ namespace BetterChestOrganizer
                 return compare;
             }
 
-            compare = a.salePrice().CompareTo(b.salePrice());
+            compare = a.ParentSheetIndex.CompareTo(b.ParentSheetIndex);
             if (compare != 0)
             {
                 return compare;
             }
 
-            compare = a.ParentSheetIndex.CompareTo(b.ParentSheetIndex);
+            compare = a.salePrice().CompareTo(b.salePrice());
             // Largest stack first, intentionally.
             return compare != 0 ? compare : b.Stack.CompareTo(a.Stack);
         }
