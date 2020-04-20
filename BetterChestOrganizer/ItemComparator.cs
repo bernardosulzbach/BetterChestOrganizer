@@ -32,7 +32,6 @@ namespace BetterChestOrganizer
             return tokens;
         }
 
-
         private static int CompareArrays<T>(ref T[] a, ref T[] b) where T : IComparable
         {
             for (var i = 0; i < Math.Max(a.Length, b.Length); i++)
@@ -81,6 +80,12 @@ namespace BetterChestOrganizer
             }
 
             compare = a.salePrice().CompareTo(b.salePrice());
+            if (compare != 0)
+            {
+                return compare;
+            }
+
+            compare = a.ParentSheetIndex.CompareTo(b.ParentSheetIndex);
             // Largest stack first, intentionally.
             return compare != 0 ? compare : b.Stack.CompareTo(a.Stack);
         }
