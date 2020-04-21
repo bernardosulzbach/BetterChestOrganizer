@@ -1,7 +1,7 @@
 {
   "Name": "BetterChestOrganizer",
   "Author": "Bernardo Sulzbach",
-  "Version": "0.3.0",
+  "Version": "0.3.1",
   "Description": "A better automatic organization functionality for chests.",
   "UniqueID": "BernardoSulzbach.BetterChestOrganizer",
   "EntryDll": "BetterChestOrganizer.dll",
