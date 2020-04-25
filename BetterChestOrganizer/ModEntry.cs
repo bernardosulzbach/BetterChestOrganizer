@@ -44,7 +44,7 @@ namespace BetterChestOrganizer
             }
 
             var copiedList = chest.items.ToList();
-            copiedList.Sort(ItemComparator.CompareItems);
+            copiedList = copiedList.OrderBy(item => item, new ItemComparer()).ToList();
             chest.items.Clear();
             chest.items.AddRange(copiedList);
             if (Debugging)

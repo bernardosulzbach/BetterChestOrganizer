@@ -5,7 +5,7 @@ using StardewValley;
 
 namespace BetterChestOrganizer
 {
-    public static class ItemComparator
+    public class ItemComparer : IComparer<Item>
     {
         private static readonly string[] CategoricalSuffixes = {"Jelly", "Cheese", "Juice", "Wine"};
 
@@ -65,8 +65,23 @@ namespace BetterChestOrganizer
             return CompareArrays(ref aTokens, ref bTokens);
         }
 
-        public static int CompareItems(Item a, Item b)
+        public int Compare(Item a, Item b)
         {
+            if (a == null)
+            {
+                if (b == null)
+                {
+                    return 0;
+                }
+
+                return -1;
+            }
+
+            if (b == null)
+            {
+                return 1;
+            }
+
             var compare = a.getCategorySortValue().CompareTo(b.getCategorySortValue());
             if (compare != 0)
             {
