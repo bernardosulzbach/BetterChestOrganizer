@@ -65,6 +65,52 @@ namespace BetterChestOrganizer
             return CompareArrays(ref aTokens, ref bTokens);
         }
 
+        private static int CompareItemQuality(Item a, Item b)
+        {
+            var aObject = a as StardewValley.Object;
+            var bObject = b as StardewValley.Object;
+            if (aObject == null)
+            {
+                if (bObject == null)
+                {
+                    return 0;
+                }
+
+                return -1;
+            }
+
+            if (bObject == null)
+            {
+                return 1;
+            }
+
+            return aObject.Quality.CompareTo(bObject.Quality);
+        }
+
+        private static int CompareItemColor(Item a, Item b)
+        {
+            var aObject = a as StardewValley.Objects.ColoredObject;
+            var bObject = b as StardewValley.Objects.ColoredObject;
+            if (aObject == null)
+            {
+                if (bObject == null)
+                {
+                    return 0;
+                }
+
+                return -1;
+            }
+
+            if (bObject == null)
+            {
+                return 1;
+            }
+
+            var aHue = new Color(aObject.color.R, aObject.color.G, aObject.color.B).H;
+            var bHue = new Color(bObject.color.R, bObject.color.G, bObject.color.B).H;
+            return aHue.CompareTo(bHue);
+        }
+
         public int Compare(Item a, Item b)
         {
             if (a == null)
@@ -83,28 +129,23 @@ namespace BetterChestOrganizer
             }
 
             var compare = a.getCategorySortValue().CompareTo(b.getCategorySortValue());
-            if (compare != 0)
-            {
-                return compare;
-            }
+            if (compare != 0) return compare;
 
             compare = CompareItemNames(a.Name, b.Name);
-            if (compare != 0)
-            {
-                return compare;
-            }
+            if (compare != 0) return compare;
 
+            // Compare item ID.
             compare = a.ParentSheetIndex.CompareTo(b.ParentSheetIndex);
-            if (compare != 0)
-            {
-                return compare;
-            }
+            if (compare != 0) return compare;
+
+            compare = CompareItemColor(a, b);
+            if (compare != 0) return compare;
+
+            compare = CompareItemQuality(a, b);
+            if (compare != 0) return compare;
 
             compare = a.SpecialVariable.CompareTo(b.SpecialVariable);
-            if (compare != 0)
-            {
-                return compare;
-            }
+            if (compare != 0) return compare;
 
             compare = a.salePrice().CompareTo(b.salePrice());
             // Largest stack first, intentionally.
