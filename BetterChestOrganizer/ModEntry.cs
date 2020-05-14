@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using StardewModdingAPI;
@@ -13,6 +14,12 @@ namespace BetterChestOrganizer
     {
         private const bool Debugging = false;
 
+        private double _maximumElapsedMilliseconds = 0.0;
+        private double _totalElapsedMilliseconds = 0.0;
+
+        private int _sortings = 0;
+
+
         public override void Entry(IModHelper helper)
         {
             helper.Events.World.ChestInventoryChanged += this.OnChestInventoryChange;
@@ -26,8 +33,17 @@ namespace BetterChestOrganizer
             }
         }
 
+        private void UpdateElapsedTimeInformation(double elapsedMilliseconds)
+        {
+            _maximumElapsedMilliseconds = Math.Max(_maximumElapsedMilliseconds, elapsedMilliseconds);
+            _totalElapsedMilliseconds += elapsedMilliseconds;
+            _sortings++;
+        }
+
         private void OnChestInventoryChange(object sender, ChestInventoryChangedEventArgs eventArgs)
         {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
             if (Context.IsMultiplayer)
             {
                 this.Monitor.Log(
@@ -52,6 +68,13 @@ namespace BetterChestOrganizer
                 this.Monitor.Log($"After ordering, the chest has", LogLevel.Debug);
                 LogChestContents(chest);
             }
+
+            stopWatch.Stop();
+            UpdateElapsedTimeInformation(stopWatch.Elapsed.TotalMilliseconds);
+            var maximum = $"Maximum: {_maximumElapsedMilliseconds:F3} ms";
+            var mean = $"Mean: {_totalElapsedMilliseconds / _sortings:F3} ms";
+            var message = $"Took {stopWatch.Elapsed.TotalMilliseconds:F3} ms to sort a chest. {maximum}. {mean}.";
+            this.Monitor.Log(message, LogLevel.Info);
         }
     }
 }
