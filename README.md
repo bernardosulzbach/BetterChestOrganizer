@@ -1,6 +1,6 @@
-# BetterChestOrganizer
+# Better Chest Organizer
 
-BetterChestOrganizer is a mod for [Stardew Valley](https://www.stardewvalley.net/) that aims to provide better automatic chest organization.
+Better Chest Organizer is a mod for [Stardew Valley](https://www.stardewvalley.net/) that aims to provide better automatic chest organization.
 
 ## Examples
 
@@ -34,7 +34,15 @@ BetterChestOrganizer is a mod for [Stardew Valley](https://www.stardewvalley.net
 
 ## Compatibility
 
-This mod was last tested using SMAPI 3.4.1 and Stardew Valley 1.4.5 on openSUSE Tumbleweed Linux.
+This mod was last tested using [SMAPI](https://smapi.io/) 3.5.0 and Stardew Valley 1.4.5 from Steam on openSUSE Tumbleweed Linux (Kernel 5.6.8-1-default) in May 2020.
+
+## Performance 
+
+This mod performs performance logging.
+The time it takes to sort a chest (with up to 36 stacks) seems to always be in the 0.5–5.0 ms range.
+Also, the first time a chest is sorted in a play session is usually slower than it would normally be.
+This is likely due to the dynamic loading of some of the code associated with the mod.
+Cases that, as of version 1.0.0, require items to be compared based on some of the parts of their names are particularly slow.
 
 ## License
 
