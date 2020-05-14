@@ -46,4 +46,4 @@ Cases that, as of version 1.0.0, require items to be compared based on some of t
 
 ## License
 
-This mod is licensed under the BSD 3-Clause License. See the provided LICENSE file for more details.
+This mod is licensed under the BSD 3-Clause License. See the provided [LICENSE](LICENSE) file for more details.
